@@ -1,10 +1,12 @@
 <script>
-   import List from "./components/list.svelte";
+   import BookmarkList from "./components/bookmarkList.svelte";
+   import TagList from "./components/tagList.svelte";
 </script>
 
 <h1>bookmarks</h1>
 <main>
-   <List />
+   <TagList />
+   <BookmarkList />
 </main>
 
 <style>

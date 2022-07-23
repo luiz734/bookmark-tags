@@ -16,8 +16,8 @@
       flex-wrap: wrap;
       padding: 1em;
       border-radius: 15px;
-      width: fit-content;  
-      max-width: 600px;
-      justify-content: space-around;
+      width: fit-content;
+      min-width: 300px;
+      justify-content: left;
    }
 </style>

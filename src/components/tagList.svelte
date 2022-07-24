@@ -28,14 +28,14 @@
 
 <style>
    .list {
-      border: 2px solid white;
+      border: 1px solid #444;
       display: flex;
       flex-wrap: wrap;
       padding: 1em;
       border-radius: 15px;
-      width: fit-content;
-      max-width: 600px;
-      justify-content: left;
+      max-width: 80%;
+      justify-content: center;
       z-index: 10 !important;
+      
    }
 </style>

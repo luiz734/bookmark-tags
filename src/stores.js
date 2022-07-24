@@ -31,6 +31,36 @@ export const bookmarks = writable([
       link: "github.com",
       tags: ["social", "favorite", "other"],
    },
+   {
+      icon: "輸",
+      label: "1Youtube",
+      link: "https://www.youtube.com/",
+      tags: ["social", "favorite", "sadadasdasdas"],
+   },
+   {
+      icon: "輸",
+      label: "1Google",
+      link: "google.com",
+      tags: ["social", "favorite"],
+   },
+   {
+      icon: "輸",
+      label: "1Facebook",
+      link: "facebook.com",
+      tags: ["social", "favorite", "windows"],
+   },
+   {
+      icon: "輸",
+      label: "1Wikipedia",
+      link: "wikipedia.org",
+      tags: ["social", "favorite"],
+   },
+   {
+      icon: "輸",
+      label: "1Github",
+      link: "github.com",
+      tags: ["social", "favorite", "other"],
+   },
 ]);
 
 export const tags = writable([

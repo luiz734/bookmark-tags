@@ -45,7 +45,7 @@
    }
    .tag {
       display: flex;
-      border: 1px solid white;
+      /* border: 1px solid white; */
       align-items: center;
       justify-content: left;
       border-radius: 5px;
@@ -53,6 +53,7 @@
       cursor: pointer;
       margin: 0.25em 0.25em;
       user-select: none;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    }
    .selected {
       border-width: 3x;

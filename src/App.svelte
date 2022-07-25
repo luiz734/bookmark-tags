@@ -1,13 +1,18 @@
 <script>
+   import { tags, bookmarks } from "./stores";
+   import { getAllTags } from "./util";
+
    import BookmarkList from "./components/bookmarkList.svelte";
    import TagList from "./components/tagList.svelte";
    import Search from "./components/search.svelte";
+
+   $tags = getAllTags($bookmarks);
+
+   
 </script>
 
 <main>
    <div class="container">
-      <h1>Texto Foda</h1>
-
       <Search />
       <TagList />
       <BookmarkList />
@@ -18,7 +23,7 @@
    .container {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: start;
       align-items: center;
       min-height: 90vh;
    }

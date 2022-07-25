@@ -3,9 +3,9 @@ import { writable } from "svelte/store";
 export const bookmarks = writable([
    {
       icon: "輸",
-      label: "Youtube",
+      label: "Youtubesssss",
       link: "https://www.youtube.com/",
-      tags: ["social", "favorite", "sadadasdasdas"],
+      tags: ["social", "favorite", "sadadasdasda", "hey"],
    },
    {
       icon: "輸",
@@ -15,9 +15,19 @@ export const bookmarks = writable([
    },
    {
       icon: "輸",
-      label: "Facebook",
+      label: "ThePirateBay",
       link: "facebook.com",
-      tags: ["social", "favorite", "windows"],
+      tags: [
+         // "social",
+         // "favorite",
+         "windows",
+         // "1social",
+         // "1favorite",
+         // "1windows",
+         // "ssocial",
+         // "fsavorite",
+         // "windosws",
+      ],
    },
    {
       icon: "輸",
@@ -62,21 +72,10 @@ export const bookmarks = writable([
       tags: ["social", "favorite", "other"],
    },
 ]);
+export const selectedBookmarks = writable([]);
 
-export const tags = writable([
-   // "favorite",
-   // "social",
-   // "mail",
-   // "1favorite",
-   // "1social",
-   // "1mail",
-   // "2favorite",
-   // "2social",
-   // "2mail",
-   // "3favorite",
-   // "3social",
-   // "3mail",
-]);
+export const tags = writable([]);
+export const selectedTags = writable(["favorite"]);
 
 export const userConfig = writable({
    tagColors: [

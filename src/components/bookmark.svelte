@@ -6,6 +6,7 @@
    const onClick = () => {
       window.open(link).focus();
    };
+
 </script>
 
 <div class="bookmark" on:click={onClick}>
@@ -19,23 +20,24 @@
       margin: 0 0.5em;
    }
    .label {
-      margin: 0 3em 0 0;
-      font-size: 1.5em;
+      margin: 0 0 0 0;
+      font-size: 1.3em;
    }
    .bookmark {
       display: flex;
-      /* border: 1px solid white; */
       align-items: center;
       justify-content: left;
-      /* min-width: 150px; */
-      flex: content;
       border-radius: 5px;
+      width: 250px;
+      max-height: 72px;
       cursor: pointer;
       margin: 0.25em 0.25em;
-      padding: 20px;
+      padding: 15px;
+      border: 1px solid transparent;
+      user-select: none;
    }
 
    .bookmark:hover {
-      background-color: #000000;
+      border: 1px solid #777;
    }
 </style>

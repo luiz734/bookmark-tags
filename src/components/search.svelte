@@ -1,37 +1,67 @@
 <script>
+   let textInput;
+   $: focus = false;
+
+   const onKeyPress = (e) => {
+      console.log(e.keyCode);
+      if (e.keyCode == 32) {
+         textInput.placeholder = "start typing";
+         textInput.focus();
+         focus = true;
+      } else if (e.keyCode == 13) {
+         textInput.placeholder = "press space to focus";
+         textInput.value = "";
+         focus = false;
+      }
+   };
 </script>
 
+<svelte:window on:keyup={onKeyPress} />
+
 <div class="search-bar">
-   <div class="input"><input type="text" placeholder="start typing" /></div>
-   <div class="icon"></div>
+   <div class:focus class="input">
+      <input
+         class:focus
+         bind:this={textInput}
+         type="text"
+         placeholder="press space to focus"
+      />
+   </div>
 </div>
 
 <style>
+   .focus {
+      background: aqua;
+      background-color: #2e2b2b !important;
+      color: #ddd !important;
+   }
    input[type="text"] {
-      -webkit-appearance: none;
       -moz-appearance: none;
       -ms-appearance: none;
       -o-appearance: none;
+      -webkit-appearance: none;
       appearance: none;
-      height: 2.5em;
-      border-radius: 10px;
-      color: #444;
-      letter-spacing: 2px;
+      background-color: #211f1f;
+      border-bottom: 1px solid #444 !important;
+      border: none;
+      caret-color: transparent;
+      color: #aaa;
+
       font-size: 1em;
+      height: 2.5em;
+      letter-spacing: 2px;
+      outline: none;
       padding: 0 0.5em;
       text-align: center;
-      caret-color: transparent;
-      width: 100%
+      width: 100%;
    }
+
    .search-bar {
       display: flex;
       align-items: center;
-      width: 100%;
+      width: 80%;
       justify-content: center;
-   }
-   .icon {
-      font-size: 2.5em;
-      margin: 0 20px;
+      margin: 2em 0;
    }
    .input {
       height: 2.5em;

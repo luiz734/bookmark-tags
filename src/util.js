@@ -21,3 +21,7 @@ export const getBooksMarksWithTags = (bookmarks, tags) => {
 
    return Array.from(filtredBookmarks);
 };
+
+export const getRandomColor = (colors) => {
+   return colors[Math.floor(Math.random() * colors.length)];
+};

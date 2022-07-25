@@ -1,14 +1,14 @@
 <script>
-   import { bookmarks, selectedBookmarks, selectedTags } from "../stores";
-   import Bookmark from "./bookmark.svelte";
+   import { searchQueue, bookmarks } from "../stores";
+   import Result from "./result.svelte";
    import { getBooksMarksWithTags } from "../util";
 
-   $: $selectedBookmarks = getBooksMarksWithTags($bookmarks, $selectedTags);
+   $: results = getBooksMarksWithTags($bookmarks, $searchQueue);
 </script>
 
 <div class="list">
-   {#each $selectedBookmarks as { icon, label, url } (label)}
-      <Bookmark {icon} {label} {url} />
+   {#each results as { icon, label, url } (label)}
+      <Result {url} />
    {/each}
 </div>
 
@@ -17,13 +17,13 @@
       border-radius: 15px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       display: flex;
-      flex-wrap: wrap;
-      height: calc((2em + 30px + 2em) * 3);
+      flex-direction: column;
+      height: calc(100px * 5);
       justify-content: left;
-      margin: 4em;
+      margin: 4em 0 0 0;
       overflow: scroll;
       padding: 1em;
-      width: calc(750px + 30px + 2em + 8px);
+      width: calc(1000px + 30px + 2em + 8px);
    }
 
    /* -------------------------------- Scrollbar ------------------------------- */

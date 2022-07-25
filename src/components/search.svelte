@@ -1,17 +1,35 @@
 <script>
+   import { searchQueue } from "../stores";
+   const SPACE_BAR = 32;
+   const RETURN = 13;
+   const ESCAPE = 27;
+
+   $: focus = document.activeElement === textInput;
    let textInput;
-   $: focus = false;
+   $: console.log($searchQueue);
 
    const onKeyPress = (e) => {
-      console.log(e.keyCode);
-      if (e.keyCode == 32) {
+      const noFocus_Space = !focus && e.keyCode == SPACE_BAR;
+      const focus_Space = focus && e.keyCode == SPACE_BAR;
+      const focus_Escape = focus && e.keyCode == ESCAPE;
+      const focus_Return = focus && e.keyCode == RETURN;
+
+      if (noFocus_Space) {
          textInput.placeholder = "start typing";
          textInput.focus();
-         focus = true;
-      } else if (e.keyCode == 13) {
+         $searchQueue = [];
+      } else if (focus_Space) {
+      } else if (focus_Escape) {
          textInput.placeholder = "press space to focus";
          textInput.value = "";
-         focus = false;
+         textInput.blur();
+      } else if (focus_Return) {
+         textInput.placeholder = "press space to focus";
+         $searchQueue = textInput.value
+            .split(" ")
+            .filter((str) => str.length > 0);
+         textInput.value = "";
+         textInput.blur();
       }
    };
 </script>
@@ -36,17 +54,11 @@
       color: #ddd !important;
    }
    input[type="text"] {
-      -moz-appearance: none;
-      -ms-appearance: none;
-      -o-appearance: none;
-      -webkit-appearance: none;
-      appearance: none;
       background-color: #211f1f;
       border-bottom: 1px solid #444 !important;
       border: none;
       caret-color: transparent;
       color: #aaa;
-
       font-size: 1em;
       height: 2.5em;
       letter-spacing: 2px;
@@ -54,18 +66,25 @@
       padding: 0 0.5em;
       text-align: center;
       width: 100%;
+
+      /* removes default style */
+      -moz-appearance: none;
+      -ms-appearance: none;
+      -o-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
    }
 
    .search-bar {
-      display: flex;
       align-items: center;
-      width: 80%;
+      display: flex;
       justify-content: center;
       margin: 2em 0;
+      width: 80%;
    }
    .input {
-      height: 2.5em;
       flex: 0 0 60%;
+      height: 2.5em;
       min-width: 400px;
    }
 </style>

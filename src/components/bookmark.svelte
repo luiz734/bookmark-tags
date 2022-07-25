@@ -1,12 +1,11 @@
 <script>
    export let icon;
    export let label;
-   export let link;
+   export let url;
 
    const onClick = () => {
-      window.open(link).focus();
+      window.open(url).focus();
    };
-
 </script>
 
 <div class="bookmark" on:click={onClick}>
@@ -24,17 +23,17 @@
       font-size: 1.3em;
    }
    .bookmark {
-      display: flex;
       align-items: center;
-      justify-content: left;
       border-radius: 5px;
-      width: 250px;
-      max-height: 72px;
-      cursor: pointer;
-      margin: 0.25em 0.25em;
-      padding: 15px;
       border: 1px solid transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: left;
+      margin: 0.25em 0.25em;
+      max-height: 72px;
+      padding: 15px;
       user-select: none;
+      width: 250px;
    }
 
    .bookmark:hover {

@@ -1,13 +1,11 @@
 <script>
-   import { tags, bookmarks, searchQueue } from "./stores";
-   import { getAllTags } from "./util";
-
+   import { searchQueue } from "./stores/state";
    import BookmarkList from "./components/bookmarkList.svelte";
    import TagList from "./components/tagList.svelte";
    import Search from "./components/search.svelte";
    import ResultList from "./components/resultList.svelte";
 
-   $tags = getAllTags($bookmarks);
+   // $tags = []; //getAllTags($bookmarks);
 </script>
 
 <main>

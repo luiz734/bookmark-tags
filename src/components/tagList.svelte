@@ -1,11 +1,12 @@
 <script>
-   import { tags, userConfig, selectedTags } from "../stores";
+   import { userConfig } from "../stores/state";
+   import { fags } from "../stores/tags";
    import { getRandomColor } from "../util";
    import Tag from "./tag.svelte";
 </script>
 
 <div class="list">
-   {#each $tags as t}
+   {#each $fags as t}
       <Tag
          color={getRandomColor($userConfig.tagColors)}
          icon={"~"}

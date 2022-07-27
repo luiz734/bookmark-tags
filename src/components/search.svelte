@@ -1,12 +1,12 @@
 <script>
-   import { searchQueue } from "../stores";
+   import { searchQueue } from "../stores/state";
    const SPACE_BAR = 32;
    const RETURN = 13;
    const ESCAPE = 27;
 
    $: focus = document.activeElement === textInput;
    let textInput;
-   $: console.log($searchQueue);
+   // $: console.log($searchQueue);
 
    const onKeyPress = (e) => {
       const noFocus_Space = !focus && e.keyCode == SPACE_BAR;

@@ -1,6 +1,6 @@
-import { writable } from "svelte/store";
+import { writable, derived } from "svelte/store";
 
-export const bookmarks = writable([
+const data = [
    {
       icon: "輸",
       label: "Youtubes",
@@ -61,24 +61,41 @@ export const bookmarks = writable([
       url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
       tags: ["tutorial", "stack", "js", "regex"],
    },
-]);
-export const selectedBookmarks = writable([]);
+];
 
-export const tags = writable([]);
-export const selectedTags = writable(["favorite"]);
+function createBookmarks() {
+   const { subscribe, update } = writable(data);
 
-export const searchQueue = writable([]);
-export const userConfig = writable({
-   tagColors: [
-      // "#3a3a3a",
-      "#5a5a5a",
-      "#623f26",
-      "#865500",
-      "#867503",
-      "#0a6a44",
-      "#3a146f",
-      "#580065",
-      "#710049",
-      "#723125",
-   ],
-});
+   const insert = (icon, label, url, tags) => {
+      update((current) => {
+         return [
+            ...current,
+            {
+               icon,
+               label,
+               url,
+               tags,
+            },
+         ];
+      });
+   };
+   const remove = (label) => {
+      update((current) => current.filter((b) => b.label != label));
+   };
+
+   const filter = (callback) => {
+      return derived(bookmarks, ($bookmarks) => {
+         return $bookmarks.filter(callback);
+      });
+   };
+
+   return {
+      subscribe,
+      insert,
+      remove,
+      filter,
+   };
+}
+const bookmarks = createBookmarks();
+
+export { bookmarks };

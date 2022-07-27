@@ -1,13 +1,16 @@
 <script>
-   import { searchQueue, bookmarks } from "../stores";
+   import { searchQueue } from "../stores/state";
+   import { bookmarks } from "../stores/bookmarks";
    import Result from "./result.svelte";
-   import { getBooksMarksWithTags } from "../util";
 
-   $: results = getBooksMarksWithTags($bookmarks, $searchQueue);
+   const results = bookmarks.filter((b) =>
+      b.tags.some((t) => $searchQueue.includes(t))
+   );
+  
 </script>
 
 <div class="list">
-   {#each results as { icon, label, url } (label)}
+   {#each $results as { icon, label, url } (label)}
       <Result {url} />
    {/each}
 </div>

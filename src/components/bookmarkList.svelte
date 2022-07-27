@@ -1,13 +1,16 @@
 <script>
-   import { bookmarks, selectedBookmarks, selectedTags } from "../stores";
+   import { selectedTags } from "../stores/state";
+   import { bookmarks } from "../stores/bookmarks";
+   import { selectedFags } from "../stores/tags";
    import Bookmark from "./bookmark.svelte";
-   import { getBooksMarksWithTags } from "../util";
 
-   $: $selectedBookmarks = getBooksMarksWithTags($bookmarks, $selectedTags);
+   const display = bookmarks.filter((b) =>
+      b.tags.some((t) => $selectedFags.includes(t))
+   );
 </script>
 
 <div class="list">
-   {#each $selectedBookmarks as { icon, label, url } (label)}
+   {#each $display as { icon, label, url } (label)}
       <Bookmark {icon} {label} {url} />
    {/each}
 </div>

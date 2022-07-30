@@ -1,11 +1,13 @@
 <script>
    import { searchQueue } from "./stores/state";
+   import { tags } from "./stores/tags";
    import BookmarkList from "./components/bookmarkList.svelte";
    import TagList from "./components/tagList.svelte";
    import Search from "./components/search.svelte";
    import ResultList from "./components/resultList.svelte";
 
-   // $tags = []; //getAllTags($bookmarks);
+   // console.log();
+   tags.insertFromBookmarks();
 </script>
 
 <main>

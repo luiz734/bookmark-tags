@@ -3,16 +3,19 @@
    import { bookmarks } from "../stores/bookmarks";
    import Result from "./result.svelte";
 
-   const results = bookmarks.filter((b) =>
+   const results = $bookmarks.filter((b) =>
       b.tags.some((t) => $searchQueue.includes(t))
    );
-  
 </script>
 
 <div class="list">
-   {#each $results as { icon, label, url } (label)}
-      <Result {url} />
-   {/each}
+   {#if results.length > 0}
+      {#each results as { icon, label, url } (label)}
+         <Result {url} />
+      {/each}
+   {:else}
+      <div class="no-results">No results found</div>
+   {/if}
 </div>
 
 <style>
@@ -23,10 +26,17 @@
       flex-direction: column;
       height: calc(100px * 5);
       justify-content: left;
-      margin: 4em 0 0 0;
+      margin: 3em 0 0 0;
       overflow: scroll;
       padding: 1em;
       width: calc(1000px + 30px + 2em + 8px);
+   }
+   .no-results {
+      color: #757575;
+      font-size: 1.5em;
+      text-align: center;
+      height: 100px;
+      width: 100%;
    }
 
    /* -------------------------------- Scrollbar ------------------------------- */

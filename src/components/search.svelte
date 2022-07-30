@@ -6,30 +6,34 @@
 
    $: focus = document.activeElement === textInput;
    let textInput;
-   // $: console.log($searchQueue);
 
    const onKeyPress = (e) => {
       const noFocus_Space = !focus && e.keyCode == SPACE_BAR;
-      const focus_Space = focus && e.keyCode == SPACE_BAR;
+      const queue_Escape = $searchQueue.length > 0 && e.keyCode == ESCAPE;
       const focus_Escape = focus && e.keyCode == ESCAPE;
       const focus_Return = focus && e.keyCode == RETURN;
 
       if (noFocus_Space) {
          textInput.placeholder = "start typing";
          textInput.focus();
-         $searchQueue = [];
-      } else if (focus_Space) {
+         searchQueue.clear();
       } else if (focus_Escape) {
          textInput.placeholder = "press space to focus";
          textInput.value = "";
          textInput.blur();
+         searchQueue.clear();
       } else if (focus_Return) {
          textInput.placeholder = "press space to focus";
-         $searchQueue = textInput.value
+         textInput.value
             .split(" ")
-            .filter((str) => str.length > 0);
+            .filter((str) => str.length > 0)
+            .map((t) => {
+               searchQueue.insert(t);
+            });
          textInput.value = "";
          textInput.blur();
+      } else if (queue_Escape) {
+         searchQueue.clear();
       }
    };
 </script>

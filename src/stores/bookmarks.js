@@ -1,4 +1,4 @@
-import { writable, derived } from "svelte/store";
+import { writable } from "svelte/store";
 
 const data = [
    {
@@ -83,19 +83,40 @@ function createBookmarks() {
       update((current) => current.filter((b) => b.label != label));
    };
 
-   const filter = (callback) => {
-      return derived(bookmarks, ($bookmarks) => {
-         return $bookmarks.filter(callback);
+   return {
+      subscribe,
+      insert,
+      remove,
+   };
+}
+const bookmarks = createBookmarks();
+
+function createSelectedBookmarks() {
+   const { subscribe, update, set } = writable([]);
+
+   const insert = (icon, label, url, tags) => {
+      update((current) => {
+         return [
+            ...current,
+            {
+               icon,
+               label,
+               url,
+               tags,
+            },
+         ];
       });
+   };
+   const remove = (label) => {
+      update((current) => current.filter((b) => b.label != label));
    };
 
    return {
       subscribe,
       insert,
       remove,
-      filter,
+      set,
    };
 }
-const bookmarks = createBookmarks();
-
-export { bookmarks };
+const selectedBookmarks = createSelectedBookmarks();
+export { bookmarks, selectedBookmarks };

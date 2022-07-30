@@ -1,12 +1,24 @@
 import { writable } from "svelte/store";
 
-export const selectedBookmarks = writable([]);
+function createSearchQueue() {
+   const { subscribe, update } = writable([]);
 
-export const tags = writable([]);
-export const selectedTags = writable(["favorite"]);
+   const insert = (tag) => {
+      update((current) => [...current, tag]);
+   };
+   const clear = () => {
+      update((current) => []);
+   };
 
-export const searchQueue = writable([]);
-export const userConfig = writable({
+   return {
+      subscribe,
+      insert,
+      clear,
+   };
+}
+const searchQueue = createSearchQueue();
+
+const userConfig = writable({
    tagColors: [
       // "#3a3a3a",
       "#5a5a5a",
@@ -20,3 +32,5 @@ export const userConfig = writable({
       "#723125",
    ],
 });
+
+export { searchQueue, userConfig };

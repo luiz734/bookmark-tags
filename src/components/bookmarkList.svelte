@@ -1,16 +1,15 @@
 <script>
-   import { selectedTags } from "../stores/state";
-   import { bookmarks } from "../stores/bookmarks";
-   import { selectedFags } from "../stores/tags";
+   import { bookmarks, selectedBookmarks } from "../stores/bookmarks";
+   import { selectedTags } from "../stores/tags";
    import Bookmark from "./bookmark.svelte";
 
-   const display = bookmarks.filter((b) =>
-      b.tags.some((t) => $selectedFags.includes(t))
+   $: $selectedBookmarks = $bookmarks.filter((b) =>
+      b.tags.some((t) => $selectedTags.includes(t))
    );
 </script>
 
 <div class="list">
-   {#each $display as { icon, label, url } (label)}
+   {#each $selectedBookmarks as { icon, label, url } (label)}
       <Bookmark {icon} {label} {url} />
    {/each}
 </div>
@@ -23,7 +22,7 @@
       flex-wrap: wrap;
       height: calc((2em + 30px + 2em) * 3);
       justify-content: left;
-      margin: 4em;
+      margin: 2em;
       overflow: scroll;
       padding: 1em;
       width: calc(750px + 30px + 2em + 8px);

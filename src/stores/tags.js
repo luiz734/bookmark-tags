@@ -1,34 +1,64 @@
-import { derived, readable } from "svelte/store";
+import { writable, get, derived } from "svelte/store";
 import { bookmarks } from "./bookmarks";
 
+const data = ["mytag1", "mytag2"];
+
 function createTags() {
-   const { subscribe, update } = derived(bookmarks, ($bookmarks) => {
+   const { subscribe, update } = writable(data);
+
+   const insert = (value) => {
+      update((current) => [...current, value]);
+   };
+   const remove = (value) => {
+      update((current) => current.filter((t) => t.value != value));
+   };
+   const insertFromArray = (tags) => {
+      tags.map((t) => insert(t));
+   };
+   const insertFromBookmarks = () => {
       const tags = new Set();
 
-      $bookmarks.map((b) => {
+      get(bookmarks).map((b) => {
          b.tags.map((tag) => tags.add(tag));
       });
 
-      return Array.from(tags);
-   });
+      insertFromArray(Array.from(tags));
+   };
 
-   return { subscribe };
+   return {
+      subscribe,
+      insert,
+      remove,
+      insertFromArray,
+      insertFromBookmarks,
+   };
 }
-const fags = createTags();
+const tags = createTags();
 
-function createSelectedTags() {
-   const { subscribe, update } = derived(fags, ($fags) => {
-      return ["favorites"];
-   });
+const createSelectedTags = () => {
+   const { subscribe, update } = writable(["favorite"]);
 
-   const insert = (tag) => {
+   const select = (tag) => {
+      update((current) => [...current, tag]);
+   };
+   const unselect = (tag) => {
+      update((current) => current.filter((t) => t != tag));
+   };
+   const unselectAll = () => {
+      update((_current) => []);
+   };
+   const toggleSelect = (tag) => {
       update((current) => {
-         current = [...current, tag];
+         if (current.includes(tag)) {
+            return current.filter((t) => t != tag);
+         } else {
+            return [...current, tag];
+         }
       });
    };
 
-   return { subscribe, insert};
-}
-const selectedFags = createSelectedTags();
+   return { subscribe, select, unselect, unselectAll, toggleSelect };
+};
+const selectedTags = createSelectedTags();
 
-export { fags, selectedFags };
+export { tags, selectedTags };

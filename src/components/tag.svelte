@@ -1,6 +1,6 @@
 <script>
-   import { selectedTags, searchQueue } from "../stores/state";
-   import { selectedFags } from "../stores/tags";
+   import { searchQueue } from "../stores/state";
+   import { tags, selectedTags } from "../stores/tags";
 
    export let icon;
    export let label;
@@ -9,18 +9,13 @@
    export let value;
 
    const onDoubleClick = (e) => {
-      $searchQueue = [];
-      $selectedTags = [value];
-      selectedFags.insert(value);
+      searchQueue.clear();
+      selectedTags.unselectAll();
+      selectedTags.select(value);
    };
    const onClick = (e) => {
-      $searchQueue = [];
-      if ($selectedTags.includes(value)) {
-         $selectedTags = $selectedFags.filter((elem) => elem != value);
-      } else {
-         $selectedTags = [...$selectedTags, value];
-         selectedFags.insert(value);
-      }
+      searchQueue.clear();
+      selectedTags.toggleSelect(value);
    };
 </script>
 

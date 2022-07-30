@@ -1,12 +1,14 @@
 <script>
    import { userConfig } from "../stores/state";
-   import { fags } from "../stores/tags";
-   import { getRandomColor } from "../util";
+   import { tags } from "../stores/tags";
    import Tag from "./tag.svelte";
+   import { getRandomColor } from "../util";
+
+   // tags.insertFromBookmarks();
 </script>
 
 <div class="list">
-   {#each $fags as t}
+   {#each $tags as t}
       <Tag
          color={getRandomColor($userConfig.tagColors)}
          icon={"~"}
@@ -27,7 +29,7 @@
       justify-content: center;
       margin: 2em 0;
       max-height: calc(90px + 2px + 2em);
-      max-width: 750px;
+      max-width: 1000px;
       padding: 1em;
    }
 </style>

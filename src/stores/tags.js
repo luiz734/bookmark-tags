@@ -1,7 +1,7 @@
 import { writable, get, derived } from "svelte/store";
 import { bookmarks } from "./bookmarks";
 
-const data = ["mytag1", "mytag2"];
+const data = [];
 
 function createTags() {
    const { subscribe, update } = writable(data);

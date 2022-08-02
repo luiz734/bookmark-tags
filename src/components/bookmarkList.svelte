@@ -9,7 +9,7 @@
 </script>
 
 <div class="list">
-   {#each $selectedBookmarks as { icon, label, url } (label)}
+   {#each $selectedBookmarks as { icon, label, url }}
       <Bookmark {icon} {label} {url} />
    {/each}
 </div>
@@ -20,12 +20,13 @@
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       display: flex;
       flex-wrap: wrap;
-      height: calc((2em + 30px + 2em) * 3);
-      justify-content: left;
-      margin: 2em;
-      overflow: scroll;
-      padding: 1em;
-      width: calc(750px + 30px + 2em + 8px);
+      /* flex-direction: column; */
+      justify-content: start;
+      align-items: center;
+      /* overflow: scroll; */
+      max-width: calc((250px) * 4 + 14px);
+      padding: 3px;
+      max-height: 100%;
    }
 
    /* -------------------------------- Scrollbar ------------------------------- */

@@ -23,7 +23,7 @@ const data = [
       icon: "",
       label: "Gmail",
       url: "https://mail.google.com/mail/u/1/#inbox=https://www.wikipedia.org/",
-      tags: ["mail", "google", "favorite"],
+      tags: ["favorite"],
    },
    {
       icon: "",
@@ -35,7 +35,7 @@ const data = [
       icon: "",
       label: "Drive",
       url: "https://drive.google.com/drive/u/0/my-drive/",
-      tags: ["google", "storage"],
+      tags: ["storage"],
    },
    {
       icon: "",
@@ -59,7 +59,45 @@ const data = [
       icon: "~",
       label: "",
       url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
-      tags: ["tutorial", "stack", "js", "regex"],
+      tags: ["tutorial", "regex"],
+   },
+   {
+      icon: "~",
+      label: "",
+      url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
+      tags: ["favorite", "regex"],
+   },
+
+   {
+      icon: "~",
+      label: "",
+      url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
+      tags: ["favorite", "regex"],
+   },
+   {
+      icon: "~",
+      label: "",
+      url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
+      tags: ["favorite", "regex"],
+   },
+
+   {
+      icon: "~",
+      label: "",
+      url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
+      tags: ["favorite", "regex"],
+   },
+   {
+      icon: "~",
+      label: "",
+      url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
+      tags: ["favorite", "regex"],
+   },
+   {
+      icon: "~",
+      label: "",
+      url: "https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression/",
+      tags: ["favorite", "regex"],
    },
 ];
 

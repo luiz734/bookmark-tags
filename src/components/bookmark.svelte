@@ -15,23 +15,24 @@
 
 <style>
    .icon {
-      font-size: 2em;
+      font-size: 3em;
       margin: 0 0.5em;
    }
    .label {
-      margin: 0 0 0 0;
+      /* margin: 0; */
       font-size: 1.3em;
    }
    .bookmark {
       align-items: center;
+      /* background-color: aqua; */
       border-radius: 5px;
       border: 1px solid transparent;
       cursor: pointer;
       display: flex;
       justify-content: left;
-      margin: 0.25em 0.25em;
-      max-height: 72px;
-      padding: 15px;
+      margin: 1px 1px;
+      height: 72px;
+      padding: 5px;
       user-select: none;
       width: 250px;
    }

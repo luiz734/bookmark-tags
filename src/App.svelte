@@ -5,13 +5,14 @@
    import TagList from "./components/tagList.svelte";
    import Search from "./components/search.svelte";
    import ResultList from "./components/resultList.svelte";
+   import AddBookmark from "./components/addBookmark.svelte";
 
-   // console.log();
    tags.insertFromBookmarks();
 </script>
 
 <main>
-   <div class="container">
+   <AddBookmark />
+   <!-- <div class="container">
       <Search />
       {#if $searchQueue.length > 0}
          <ResultList />
@@ -19,7 +20,7 @@
          <TagList />
          <BookmarkList />
       {/if}
-   </div>
+   </div> -->
 </main>
 
 <style>

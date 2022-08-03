@@ -1,35 +1,29 @@
 <script>
-   import { searchQueue } from "../stores/state";
-   import { tags, selectedTags } from "../stores/tags";
+   import { selectedTab, tabs, selectedBookmarks } from "../stores/tabs";
 
-   export let icon;
    export let label;
-   export let color;
    export let name;
    export let value;
 
    const onDoubleClick = (e) => {
-      searchQueue.clear();
-      selectedTags.unselectAll();
-      selectedTags.select(value);
+      console.log("renaming " + label);
    };
    const onClick = (e) => {
-      searchQueue.clear();
-      selectedTags.toggleSelect(value);
+      $selectedTab = label;
    };
 </script>
 
 <div
    style="--background-color: #211f1f;"
    class="tag"
-   class:selected={$selectedTags.includes(value)}
-   on:click={onDoubleClick}
+   class:selected={$selectedTab == value}
+   on:click={onClick}
    on:dblclick={onDoubleClick}
 >
-   <input type="checkbox" bind:group={$selectedTags} {name} {value} />
+   <input type="radio" {name} {value} />
    <!-- <div class="icon">{icon}</div> -->
    <div class="label">{label}</div>
-   <div class:hidde-border={$selectedTags.includes(value)}></div>
+   <div class:hidde-border={$selectedTab == value} />
 </div>
 
 <style>
@@ -40,7 +34,6 @@
    .hidde-border {
       position: absolute;
       width: 100%;
-      /* width: 50px; */
       background-color: #211f1f;
       height: 2px;
       bottom: -2px;
@@ -52,21 +45,16 @@
    .tag {
       position: relative;
       align-items: center;
-      /* background-color: #2e2b2b; */
-      /* background-color: #131212; */
       background-color: transparent;
-      /* border-radius: 10px 2px 10px 2px; */
-      /* border: 1px solid transparent; */
-      /* box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.3); */
       color: #ddd;
       font-size: 20px;
       cursor: pointer;
       display: flex;
       justify-content: left;
-      margin: 0em 0.2em 0 0.2em;
+      margin: 0 3px 0 3px;
       user-select: none;
       height: 100%;
-      /* border-bottom: 2px solid #ddd; */
+      border: 2px solid transparent;
    }
    .selected {
       color: #eee;
@@ -80,7 +68,7 @@
       font-weight: bold;
    }
    /* removes default style */
-   input[type="checkbox"] {
+   input[type="radio"] {
       -moz-appearance: none;
       -ms-appearance: none;
       -o-appearance: none;

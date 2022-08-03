@@ -1,46 +1,84 @@
 <script>
-   import { bookmarks } from "../stores/bookmarks";
+   import { tabs, selectedTab } from "../stores/tabs";
+   import { addBookmarkOverlay } from "../stores/state";
+   import { onMount } from "svelte";
 
-   let icon = "~";
+   let icon = "";
    let label = "";
    let url = "";
-   let tags = "";
+
+   let DOM_icon;
 
    const onSubmit = () => {
-      console.log(icon);
-      bookmarks.insert(
-         icon,
-         label,
-         url,
-         tags.split(" ").filter((str) => str.length > 0)
-      );
-      console.log($bookmarks);
+      tabs.insert($selectedTab, icon, label, url);
+      console.log(`inserted in {$selectedTabs} `);
+      icon = label = url = "";
+      DOM_icon.focus();
+   };
+   const onClose = () => {
+      $addBookmarkOverlay = false;
    };
 </script>
 
-<form on:submit|preventDefault={onSubmit}>
-   <div class="item">
-      <label for="icon">Icon</label>
-      <input type="text" id="icon" bind:value={icon} />
-   </div>
-   <div class="item">
-      <label for="label">Name</label>
-      <input type="text" id="label" bind:value={label} />
-   </div>
-   <div class="item">
-      <label for="url">URL</label>
-      <input type="text" id="url" bind:value={url} />
-   </div>
-   <div class="item">
-      <label for="tags">Tags</label>
-      <input type="text" id="tags" bind:value={tags} />
-   </div>
-   <div class="buttom">
-      <button type="submit"> Add Bookmark </button>
-   </div>
-</form>
+<div class="overlay" class:hidden={!$addBookmarkOverlay}>
+   <form on:submit|preventDefault={onSubmit}>
+      <div class="close-btn" on:click={onClose}></div>
+      <div class="item">
+         <label for="icon" bind:this={DOM_icon}>Icon</label>
+         <input type="text" id="icon" bind:value={icon} />
+      </div>
+      <div class="item">
+         <label for="label">Name</label>
+         <input type="text" id="label" bind:value={label} />
+      </div>
+      <div class="item">
+         <label for="url">URL</label>
+         <input type="text" id="url" bind:value={url} />
+      </div>
+      <div class="buttom">
+         <button type="submit"> Add Bookmark </button>
+      </div>
+   </form>
+</div>
 
 <style>
+   .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      user-select: none;
+      cursor: pointer;
+      color: #444;
+   }
+   .close-btn:hover {
+      color: #aaa;
+   }
+   .hidden {
+      display: none !important;
+   }
+   .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      justify-content: center;
+      align-items: flex-start;
+      /* margin-top: 40px; */
+      background-color: #0000007e;
+      z-index: 1;
+      display: flex;
+   }
+   form {
+      padding: 1em;
+      position: relative;
+      background-color: #211f1f;
+      display: flex;
+      display: inline-block;
+      flex-direction: column;
+      align-items: center;
+      width: 500px;
+      border: 2px solid #444;
+      border-radius: 8px;
+   }
    .buttom {
       width: 100%;
       margin-top: 20px;
@@ -61,15 +99,7 @@
       border-color: #666;
       color: #ccc;
    }
-   form {
-      padding: 1em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 500px;
-      border: 2px solid #444;
-      border-radius: 8px;
-   }
+
    .item {
       margin: 0.2em 0;
    }

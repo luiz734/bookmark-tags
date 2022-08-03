@@ -1,23 +1,6 @@
 import { writable } from "svelte/store";
 
-function createSearchQueue() {
-   const { subscribe, update } = writable([]);
-
-   const insert = (tag) => {
-      update((current) => [...current, tag]);
-   };
-   const clear = () => {
-      update((current) => []);
-   };
-
-   return {
-      subscribe,
-      insert,
-      clear,
-   };
-}
-const searchQueue = createSearchQueue();
-
+const addBookmarkOverlay = writable(false);
 const userConfig = writable({
    tagColors: [
       // "#3a3a3a",
@@ -33,4 +16,4 @@ const userConfig = writable({
    ],
 });
 
-export { searchQueue, userConfig };
+export { userConfig, addBookmarkOverlay };

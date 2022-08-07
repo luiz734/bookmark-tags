@@ -3,8 +3,12 @@
    export let label;
    export let url;
 
-   const onClick = () => {
-      window.open(url).focus();
+   const onClick = (e) => {
+      if (e.ctrlKey) {
+         window.open(url).focus();
+      } else {
+         window.open(url, "_self");
+      }
    };
 </script>
 
@@ -24,9 +28,11 @@
    }
    .bookmark {
       align-items: center;
-      /* background-color: aqua; */
+
+      /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+      background-color: #292626;
       border-radius: 5px;
-      border: 1px solid transparent;
+      border: 2px solid transparent;
       cursor: pointer;
       display: flex;
       justify-content: left;
@@ -35,9 +41,12 @@
       padding: 5px;
       user-select: none;
       width: 250px;
+      margin: 5px;
    }
 
    .bookmark:hover {
-      border: 1px solid #777;
+      border: 2px solid #444;
+
+      /* box-shadow: 0 4px 8px 0 rgba(184, 184, 184, 0.342); */
    }
 </style>

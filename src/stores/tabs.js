@@ -3,23 +3,13 @@ import { writable, get } from "svelte/store";
 const bookmarks = [
    {
       icon: "輸",
-      label: "youtubes",
+      label: "Youtube",
       url: "https://www.youtube.com/",
    },
    {
       icon: "",
       label: "WhatsApp",
       url: "https://sistemas2.utfpr.edu.br/dpls/sistema/aluno01/mpmenu.inicio/",
-   },
-   {
-      icon: "龎",
-      label: "DAINF",
-      url: "https://moodle.dainf.ct.utfpr.edu.br/",
-   },
-   {
-      icon: "",
-      label: "Gmail",
-      url: "https://mail.google.com/mail/u/1/#inbox=https://www.wikipedia.org/",
    },
    {
       icon: "",
@@ -29,12 +19,7 @@ const bookmarks = [
    {
       icon: "",
       label: "Drive",
-      url: "https://drive.google.com/drive/u/0/my-drive/",
-   },
-   {
-      icon: "",
-      label: "Outlook",
-      url: "https://outlook.live.com/mail/0/",
+      url: "https://drive.google.com/drive/my-drive",
    },
    {
       icon: "",
@@ -44,10 +29,51 @@ const bookmarks = [
    {
       icon: "ﮊ",
       label: "ThePirateBay",
-      url: "https://thepiratebay.org/index.html/",
+      url: "https://thepiratebay.org/",
+   },
+];
+const utfpr = [
+   {
+      icon: "拾",
+      label: "UTFPR",
+      url: "https://sistemas2.utfpr.edu.br/login?returnUrl=%2Fdpls%2Fsistema%2Faluno01%2Fmpmenu.inicio",
+   },
+   {
+      icon: "龎",
+      label: "DAINF",
+      url: "https://moodle.dainf.ct.utfpr.edu.br/",
+   },
+   {
+      icon: "",
+      label: "Drive",
+      url: "https://drive.google.com/drive/u/1/my-drive",
    },
 ];
 
+const mail = [
+   {
+      icon: "",
+      label: "Gmail",
+      url: "https://mail.google.com/mail/u/1/#inbox=https://www.wikipedia.org/",
+   },
+   {
+      icon: "",
+      label: "Outlook",
+      url: "https://outlook.live.com/mail/0/",
+   },
+];
+const localhost = [
+   {
+      icon: "泌",
+      label: "8080",
+      url: "http://localhost:8080",
+   },
+   {
+      icon: "泌",
+      label: "5000",
+      url: "http://localhost:5000",
+   },
+];
 function createSelectedBookmarks() {
    const { subscribe, update, set } = writable([]);
 
@@ -78,12 +104,21 @@ const selectedBookmarks = createSelectedBookmarks();
 
 const data = [
    {
-      tabLabel: "favorite",
+      tabLabel: "Favorites",
       bookmarks: bookmarks,
    },
    {
-      tabLabel: "tab2",
-      bookmarks: [],
+      tabLabel: "UTFPR",
+      bookmarks: utfpr,
+   },
+
+   {
+      tabLabel: "Mail",
+      bookmarks: mail,
+   },
+   {
+      tabLabel: "localhost",
+      bookmarks: localhost,
    },
 ];
 
@@ -124,7 +159,7 @@ function createTabs() {
 const tabs = createTabs();
 
 const createSelectedTab = () => {
-   const { subscribe, update, set } = writable("favorite");
+   const { subscribe, update, set } = writable("Favorites");
 
    const select = (tabLabel) => {
       update((_current) => tabLabel);

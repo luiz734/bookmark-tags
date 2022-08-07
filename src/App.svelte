@@ -5,8 +5,11 @@
    import { tabs, selectedBookmarks, selectedTab } from "./stores/tabs";
 </script>
 
+<svelte:head>
+   <title>New Tab</title>
+</svelte:head>
 <main>
-   <AddBookmark />
+   <!-- <AddBookmark /> -->
    <TagList />
    <div class="container">
       <BookmarkList />
@@ -20,5 +23,6 @@
       flex-direction: column;
       justify-content: center;
       height: calc(100vh - 35px);
+      font-size: 16px;
    }
 </style>

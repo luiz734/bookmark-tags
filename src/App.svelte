@@ -9,6 +9,13 @@
       await tabs.pullData();
       console.log("mounted");
    });
+
+   // chrome.bookmarks.onChanged.addListener(async (id, changeInfo) => {
+   //    await tabs.pushData($tabs);
+   // });
+   // chrome.bookmarks.onCreated.addListener(async (id, bookmark) => {
+   //    await tabs.pushData($tabs);
+   // });
 </script>
 
 <svelte:head>
@@ -17,9 +24,9 @@
 <main>
    <!-- <AddBookmark /> -->
    <TabList />
-   <!-- <div class="container"> -->
-   <!-- <BookmarkList /> -->
-   <!-- </div> -->
+   <div class="container">
+      <BookmarkList />
+   </div>
 </main>
 
 <style>

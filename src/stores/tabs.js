@@ -7,11 +7,11 @@ const createTabs = () => {
       const response = await chrome.storage.sync.get(["tabs"]);
       set(response.tabs);
    };
-   const pushData = async (data) => {
-      await chrome.storage.sync.set({ tabs: data });
-      set(data);
-   };
-   return { pullData, pushData, subscribe };
+   // const pushData = async (data) => {
+   //    await chrome.storage.sync.set({ tabs: data });
+   //    set(data);
+   // };
+   return { pullData, subscribe };
 };
 const tabs = createTabs();
 const selectedTab = writable("Favorites");

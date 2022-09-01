@@ -1,5 +1,6 @@
 <script>
    import { selectedTab, tabs, selectedBookmarks } from "../stores/tabs";
+   import { onMount } from "svelte";
 
    export let label;
    export let name;
@@ -8,6 +9,7 @@
    const onDoubleClick = (e) => {
       console.log("renaming " + label);
    };
+
    const onClick = (e) => {
       $selectedTab = label;
    };

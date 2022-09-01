@@ -3,9 +3,13 @@
    import { addBookmarkOverlay } from "../stores/state";
    import Bookmark from "./bookmark.svelte";
 
-   $: $selectedBookmarks = $tabs.find(
-      (t) => t.tabLabel == $selectedTab
-   ).bookmarks;
+   $: {
+      const activeTab = $tabs.find((t) => t.tabLabel == $selectedTab);
+      $selectedBookmarks = [];
+      if (activeTab) {
+         $selectedBookmarks = activeTab.bookmarks;
+      }
+   }
 
    const onClickAddBtn = () => {
       $addBookmarkOverlay = true;

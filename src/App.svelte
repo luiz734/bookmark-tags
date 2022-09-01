@@ -1,8 +1,14 @@
 <script>
-   import AddBookmark from "./components/addBookmark.svelte";
+   import { onMount } from "svelte";
+
    import BookmarkList from "./components/bookmarkList.svelte";
-   import TagList from "./components/tabList.svelte";
-   import { tabs, selectedBookmarks, selectedTab } from "./stores/tabs";
+   import TabList from "./components/tabList.svelte";
+   import { tabs } from "./stores/tabs";
+
+   onMount(async () => {
+      await tabs.pullData();
+      console.log("mounted");
+   });
 </script>
 
 <svelte:head>
@@ -10,10 +16,10 @@
 </svelte:head>
 <main>
    <!-- <AddBookmark /> -->
-   <TagList />
-   <div class="container">
-      <BookmarkList />
-   </div>
+   <TabList />
+   <!-- <div class="container"> -->
+   <!-- <BookmarkList /> -->
+   <!-- </div> -->
 </main>
 
 <style>

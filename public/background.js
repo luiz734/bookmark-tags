@@ -1,64 +1,65 @@
-const data = {
-   rootId: "",
-   tabs: [],
-};
-
 const initializeStorage = async () => {
    // creates extension root folder
    await chrome.bookmarks.getTree();
    const newFolder = await chrome.bookmarks.create({ title: "tabs" });
-   data.rootId = newFolder.id;
+   const rootId = newFolder.id;
    // adds the default bookmark folder
    await chrome.bookmarks.create({
       title: "Favorites",
       parentId: newFolder.id,
    });
    // sync the data with the storage
-   // await chrome.storage.sync.remove(["data"]);
-   console.log(data);
-   await chrome.storage.sync.set({ ...data });
+   await chrome.storage.sync.set({ rootId, tabs: [] });
 };
 
 const readFromBookmarks = async () => {
-   const allTabs = await chrome.bookmarks.getChildren(data.rootId);
+   const response = await chrome.storage.sync.get(["rootId"]);
+   const rootId = response.rootId;
+   if (!rootId) {
+      console.error("Coudn't get rootId from storage");
+   }
+   console.log(rootId);
+   const allTabs = await chrome.bookmarks.getChildren(rootId);
+   if (!allTabs) {
+      console.error("Couldn't get root");
+   }
 
-   data.tabs = [];
+   const tabs = [];
    await Promise.all(
       allTabs.map(async (tab) => {
          const children = await chrome.bookmarks.getChildren(tab.id);
+         if (!children) {
+            console.error(`Couldn't get children of ${tab}`);
+         }
+         console.log("tab is fine");
+
          const bookmarks = [];
          children.map((bookmark) => {
             const splitedTitle = bookmark.title.split("_");
-            let icon = splitedTitle[0];
-            let label = splitedTitle.slice(1).join(" ");
-            // Fix when there is no icon
-            if (label == "") {
-               label = icon;
-               icon = "";
+            let icon = "";
+            // assume that there is no icon ar first
+            let label = splitedTitle[0];
+
+            // if there is an icon change the label accordingly
+            const hasIcon = splitedTitle.length > 1;
+            if (hasIcon) {
+               icon = splitedTitle[0];
+               label = splitedTitle.slice(1).join(" ");
             }
             const url = bookmark.url;
 
             bookmarks.push({ icon, label, url });
          });
-         data.tabs.push({ tabLabel: tab.title, bookmarks: bookmarks });
+         tabs.push({ tabLabel: tab.title, bookmarks: bookmarks });
       })
    );
 
-   // await chrome.storage.sync.remove(["data"]);
-   console.log("read from bookmarks");
-   console.log(data);
-   await chrome.storage.sync.set({ ...data });
+   console.log(`read from bookmarks with data`);
+   await chrome.storage.sync.set({ rootId, tabs });
 };
 
 const getDataFromBookmarks = async () => {
    await readFromBookmarks();
-   // try {
-   // readFromBookmarks(() => {
-   //       console.log("get data from bookmarks done");
-   //    });
-   // } catch (e) {
-   //    console.error(e);
-   // }
 };
 
 chrome.runtime.onInstalled.addListener(async () => {

@@ -8,6 +8,7 @@
    onMount(async () => {
       await tabs.pullData();
       console.log("mounted");
+      console.log($tabs);
    });
 
    // chrome.bookmarks.onChanged.addListener(async (id, changeInfo) => {
